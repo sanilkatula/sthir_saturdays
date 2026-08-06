@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Sthir Saturdays — sixty minutes of choice-making practice every week with a diverse group." />
+  <meta name="theme-color" content="#662d90" />
+  <meta property="og:title" content="Sthir Saturdays" />
+  <meta property="og:description" content="A mind gym for your discernment muscle." />
+  <meta property="og:type" content="website" />
+  <title>Sthir Saturdays</title>
+
+  <style>
+    /* =========================================================
+       STHIR SATURDAYS — standalone static page
+       ---------------------------------------------------------
+       HEADER / COVER BACKGROUND
+
+       Drop your image inside /assets and change ONLY this line:
+
+       --hero-bg-image: url('./assets/header-bg.png');
+
+       Keep it as "none" to use the built-in placeholder.
+       ========================================================= */
+    :root {
+      --hero-bg-image: url('./assets/header-bg.png');
+
+      --paper: #fff7df;
+      --paper-soft: #fffdf5;
+      --ink: #351e4f;
+      --ink-soft: #6c5482;
+      --line: rgba(102, 45, 144, 0.18);
+      --line-strong: rgba(102, 45, 144, 0.34);
+      --accent: #662d90;
+      --accent-2: #f26920;
+      --accent-3: #ffe8a3;
+      --accent-hot: #f2182b;
+      --white: #fff;
+
+      --page: 930px;
+      --page-wide: 1120px;
+      --radius-sm: 10px;
+      --radius-md: 18px;
+      --radius-lg: 28px;
+      --shadow: 0 18px 54px rgba(35, 31, 26, 0.09);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.68;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    ::selection {
+      color: var(--white);
+      background: var(--accent);
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 999;
+      top: 12px;
+      left: 12px;
+      transform: translateY(-180%);
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--ink);
+      text-decoration: none;
+      transition: transform 160ms ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    /* =========================
+       Cover / header placeholder
+       ========================= */
+    .cover {
+      position: relative;
+      min-height: clamp(170px, 16.5vw, 300px);
+      overflow: hidden;
+      background-color: var(--accent);
+      background-image: var(--hero-bg-image);
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      isolation: isolate;
+    }
+
+    .cover::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.02), rgba(0,0,0,0.04));
+      pointer-events: none;
+    }
+
+
+
+    /* =========================
+       Main document shell
+       ========================= */
+    .document {
+      width: min(calc(100% - 40px), var(--page));
+      margin: 0 auto;
+      padding: clamp(48px, 7vw, 84px) 0 clamp(74px, 10vw, 120px);
+    }
+
+    .hero-copy {
+      padding-bottom: clamp(46px, 7vw, 72px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 18px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    blockquote {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 820px;
+      margin-bottom: 14px;
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-size: clamp(3.4rem, 8.1vw, 6.9rem);
+      font-weight: 500;
+      line-height: 0.92;
+      letter-spacing: -0.055em;
+    }
+
+    .tagline {
+      max-width: 670px;
+      margin-bottom: 26px;
+      color: var(--ink-soft);
+      font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+      line-height: 1.45;
+    }
+
+    .intro {
+      max-width: 760px;
+      margin-bottom: 24px;
+      font-size: clamp(1.05rem, 2vw, 1.24rem);
+      line-height: 1.62;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 28px 0 22px;
+    }
+
+    .meta {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 6px 11px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.22);
+      font-size: 12px;
+      font-weight: 720;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 12px 18px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      color: var(--white);
+      background: var(--accent);
+      box-shadow: 0 10px 24px rgba(39,63,53,0.13);
+      font-size: 14px;
+      font-weight: 760;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      background: #1f342c;
+      box-shadow: 0 14px 30px rgba(39,63,53,0.18);
+    }
+
+    .cta:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(39,63,53,0.28);
+      outline-offset: 4px;
+    }
+
+    .cta svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    /* =========================
+       Definition callout
+       ========================= */
+    .definition {
+      margin: clamp(38px, 6vw, 58px) 0 clamp(74px, 9vw, 104px);
+      padding: 20px 0 20px clamp(18px, 4vw, 30px);
+      border-left: 3px solid var(--accent);
+      color: var(--ink-soft);
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-size: clamp(1.1rem, 2.1vw, 1.35rem);
+      line-height: 1.6;
+    }
+
+    .definition strong {
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 0.78em;
+      letter-spacing: 0.08em;
+    }
+
+    /* =========================
+       Sections
+       ========================= */
+    .section {
+      margin-top: clamp(76px, 10vw, 112px);
+    }
+
+    .section:first-of-type {
+      margin-top: 0;
+    }
+
+    .section h2 {
+      max-width: 810px;
+      margin-bottom: clamp(28px, 4vw, 42px);
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-size: clamp(2.15rem, 5vw, 4.25rem);
+      font-weight: 500;
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    .prose {
+      max-width: 790px;
+    }
+
+    .prose p {
+      margin-bottom: 21px;
+      color: #35322e;
+      font-size: clamp(1.02rem, 1.7vw, 1.14rem);
+    }
+
+    .prose p:last-child {
+      margin-bottom: 0;
+    }
+
+    .rule {
+      width: 100%;
+      height: 1px;
+      margin: clamp(62px, 8vw, 86px) 0;
+      border: 0;
+      background: var(--line);
+    }
+
+    /* =========================
+       Why now — split blocks
+       ========================= */
+    .reason-grid,
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .reason,
+    .practice {
+      position: relative;
+      min-height: 100%;
+      padding: clamp(24px, 4vw, 38px);
+      background: var(--paper-soft);
+    }
+
+    .reason__title,
+    .practice__title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-size: clamp(1.45rem, 3vw, 2.05rem);
+      font-weight: 500;
+      line-height: 1.12;
+    }
+
+    .reason__symbol {
+      display: grid;
+      width: 37px;
+      height: 37px;
+      flex: 0 0 auto;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 50%;
+      color: var(--accent);
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      font-size: 18px;
+    }
+
+    .reason p,
+    .practice p {
+      margin-bottom: 0;
+      color: var(--ink-soft);
+      font-size: 1rem;
+    }
+
+    .statement {
+      margin: clamp(66px, 9vw, 104px) auto;
+      max-width: 780px;
+      padding: 0 clamp(5px, 3vw, 30px);
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-size: clamp(2rem, 5.2vw, 4.25rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+      text-align: center;
+    }
+
+    .statement::before,
+    .statement::after {
+      display: block;
+      width: 46px;
+      height: 1px;
+      margin: 0 auto 22px;
+      background: var(--accent-3);
+      content: "";
+    }
+
+    .statement::after {
+      margin: 22px auto 0;
+    }
+
+    /* =========================
+       Actual room
+       ========================= */
+    .room-lede {
+      margin: -12px 0 30px;
+      color: var(--ink-soft);
+      font-size: clamp(1.04rem, 2vw, 1.2rem);
+    }
+
+    .practice {
+      background: #f9f6ef;
+    }
+
+    .practice:nth-child(1) {
+      background: #edf0e8;
+    }
+
+    .practice:nth-child(2) {
+      background: #f3eadc;
+    }
+
+    .practice__icon {
+      display: inline-grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
+      margin-bottom: 22px;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.48);
+      font-size: 23px;
+    }
+
+    .closing-note {
+      max-width: 760px;
+      margin: clamp(34px, 5vw, 50px) 0 0;
+      font-family: Georgia, "Times New Roman", Times, serif;
+      font-size: clamp(1.25rem, 2.8vw, 1.75rem);
+      line-height: 1.5;
+    }
+
+    .footnote {
+      margin: clamp(54px, 7vw, 78px) 0 0;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      color: var(--ink-soft);
+      font-size: 0.92rem;
+    }
+
+    .footnote em {
+      color: var(--ink);
+      font-weight: 650;
+    }
+
+    /* =========================
+       Footer
+       ========================= */
+    footer {
+      padding: 24px 20px 34px;
+      color: rgba(36,34,31,0.62);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    footer a {
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    /* =========================
+       Responsive
+       ========================= */
+    @media (max-width: 720px) {
+      .document {
+        width: min(calc(100% - 30px), var(--page));
+        padding-top: 42px;
+      }
+
+      .cover {
+        min-height: 235px;
+      }
+
+
+      h1 {
+        font-size: clamp(3.15rem, 17vw, 5rem);
+      }
+
+      .reason-grid,
+      .practice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-row {
+        gap: 7px;
+      }
+
+      .definition {
+        margin-bottom: 68px;
+      }
+
+      .statement {
+        margin-block: 68px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .document {
+        width: min(calc(100% - 24px), var(--page));
+      }
+
+      .cta {
+        width: 100%;
+      }
+
+      .reason,
+      .practice {
+        padding: 23px 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <!-- ========================================================
+       HEADER / COVER IMAGE PLACEHOLDER
+       The bundled brand banner is being used here as the top header background. Swap --hero-bg-image in :root above if you want a different one.
+       ======================================================== -->
+  <header class="cover" aria-label="Sthir Saturdays cover"></header>
+
+  <main id="content" class="document">
+    <section class="hero-copy" aria-labelledby="page-title">
+      <div class="eyebrow">weekly practice</div>
+      <h1 id="page-title">Sthir Saturdays</h1>
+      <p class="tagline">Sthir : a mind gym for your discernment muscle.</p>
+
+      <p class="intro">
+        Sthir Saturdays: sixty minutes of choice making practice every week with diverse group. you come, we play*, and you stay with structured practice of being present during the week.
+      </p>
+
+      <div class="meta-row" aria-label="Event details">
+        <span class="meta">Saturdays</span>
+        <span class="meta">8:30–9:30 PM IST</span>
+        <span class="meta">Zoom</span>
+        <span class="meta">Free</span>
+      </div>
+
+      <a class="cta" href="https://forms.gle/jkNnp8aySgCaUSRY9" target="_blank" rel="noopener noreferrer">
+        Join in!
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </section>
+
+    <blockquote class="definition">
+      <strong>DISCERNMENT /</strong> judgment, insight, and perception—the ability to see clearly, choose without spiralling, and own your choice.
+    </blockquote>
+
+    <section class="section" aria-labelledby="about-heading">
+      <h2 id="about-heading">okay, but what does this have to do with me?</h2>
+      <div class="prose">
+        <p>well, if you are a student who made your first big choice about subject, university, country that you want to study,</p>
+        <p>or you are finishing university, getting face to face with "real" world,</p>
+        <p>or started navigating the high-stakes puzzle of a new career path, company, or conscious life…</p>
+        <p>you have years of formal study, you are well read, you listen into the podcasts with intention, observe the world, don’t fear status quo at all, still you have a feeling that can’t put a finger to it. it feels like you’ve been "schooled down to social size," and this reality of adulting is messy, overwhelming, and at times disempowering.</p>
+        <p>this is not a “you” or “world” or “you at a war with the whole world” thing. It is a missing skill. nothing prepared you for that, and you would actually like it here- when you explore play with presence and build that missing skill with diverse group.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="why-heading">
+      <h2 id="why-heading">why this, why now?</h2>
+      <div class="reason-grid">
+        <article class="reason">
+          <h3 class="reason__title"><span class="reason__symbol">∞</span>More options</h3>
+          <p>Nearly infinite possibilities at your disposal, and very little practice of choosing between them makes you wonder “which one I connect with and why to choose only one, when I can be multiple?”</p>
+        </article>
+        <article class="reason">
+          <h3 class="reason__title"><span class="reason__symbol">↻</span>More thinking</h3>
+          <p>This more is going to only increase and is adding to confusion. more advice, more inspiration, more knowledge. it is not creating any clarity, rather creating noise… until you break it! with YOUR discernment.</p>
+        </article>
+      </div>
+    </section>
+
+    <blockquote class="statement">“Choice is a muscle. Train it during your deciding decade, or it stays weak.”</blockquote>
+
+    <section class="section" aria-labelledby="room-heading">
+      <h2 id="room-heading">the actual room: Sthir Saturdays</h2>
+      <p class="room-lede">diverse group of 8-10. 60 min. once a week. curated games, no lectures</p>
+
+      <div class="practice-grid">
+        <article class="practice">
+          <div class="practice__icon" aria-hidden="true">🎭</div>
+          <h3 class="practice__title">Improv</h3>
+          <p>Applied improvisation and play* is fun kind of uncomfortable. you practice listening, creating, partnering and Making a Choice real time over thinking about and drowning into What ifs.</p>
+        </article>
+
+        <article class="practice">
+          <div class="practice__icon" aria-hidden="true">🧭</div>
+          <h3 class="practice__title">Wayfinding Your Life</h3>
+          <p>map play to presence → practice DYL (Design Your Life) Stanford d.school-rooted tools and frameworks during your week.</p>
+        </article>
+      </div>
+
+      <p class="closing-note">No worksheets to “discover your passion.” Just weekly reps until choosing, and owning your choice, feels more natural.</p>
+
+      <p class="footnote"><em>*play</em> - a state of active, joyful, and low-stakes experimentation where performers drop their inner critic, embrace spontaneity, and treat the creation of a scene like a fun game rather than a stressful performance. It relies on a mindset of curiosity and mutual trust.</p>
+    </section>
+  </main>
+
+  <footer>
+    Sthir Saturdays · <a href="https://forms.gle/jkNnp8aySgCaUSRY9" target="_blank" rel="noopener noreferrer">join the next session</a>
+  </footer>
+</body>
+</html>
