@@ -20,7 +20,7 @@
 
        --hero-bg-image: url('./assets/header-bg.png');
 
-       Keep it as "none" to use the built-in placeholder.
+       The bundled brand image is active by default; replace the URL to swap it.
        ========================================================= */
     :root {
       --hero-bg-image: url('./assets/header-bg.png');
@@ -208,7 +208,7 @@
       font-size: 12px;
       font-weight: 720;
       letter-spacing: 0.05em;
-      text-transform: uppercase;
+      text-transform: none;
     }
 
     .cta {
@@ -222,7 +222,7 @@
       border-radius: 999px;
       color: var(--white);
       background: var(--accent);
-      box-shadow: 0 10px 24px rgba(39,63,53,0.13);
+      box-shadow: 0 10px 24px rgba(102,45,144,0.18);
       font-size: 14px;
       font-weight: 760;
       letter-spacing: 0.06em;
@@ -233,13 +233,13 @@
 
     .cta:hover {
       transform: translateY(-2px);
-      background: #1f342c;
-      box-shadow: 0 14px 30px rgba(39,63,53,0.18);
+      background: var(--accent-2);
+      box-shadow: 0 14px 30px rgba(242,105,32,0.24);
     }
 
     .cta:focus-visible,
     a:focus-visible {
-      outline: 3px solid rgba(39,63,53,0.28);
+      outline: 3px solid rgba(242,105,32,0.34);
       outline-offset: 4px;
     }
 
@@ -251,6 +251,86 @@
     /* =========================
        Definition callout
        ========================= */
+
+
+    /* =========================
+       Experience video placeholder
+       ========================= */
+    .video-slot {
+      margin: clamp(38px, 6vw, 64px) 0 clamp(54px, 8vw, 82px);
+    }
+
+    .video-placeholder,
+    .experience-video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .video-placeholder {
+      position: relative;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(102, 45, 144, 0.22);
+      background:
+        radial-gradient(circle at 17% 24%, var(--accent-hot) 0 6%, transparent 6.4%),
+        radial-gradient(ellipse at 24% 42%, var(--accent-2) 0 11%, transparent 11.5%),
+        radial-gradient(ellipse at 34% 34%, var(--accent-3) 0 12%, transparent 12.5%),
+        radial-gradient(ellipse at 45% 42%, var(--accent-2) 0 11%, transparent 11.5%),
+        linear-gradient(135deg, #662d90 0%, #74369e 100%);
+    }
+
+    .video-placeholder::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(0,0,0,0.08));
+      pointer-events: none;
+    }
+
+    .video-play {
+      position: relative;
+      z-index: 1;
+      width: clamp(62px, 8vw, 86px);
+      height: clamp(62px, 8vw, 86px);
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      color: var(--accent-2);
+      background: transparent;
+      cursor: pointer;
+      filter: drop-shadow(0 12px 28px rgba(37, 13, 57, 0.30));
+      transition: transform 160ms ease, color 160ms ease;
+    }
+
+    .video-play:hover {
+      transform: scale(1.05);
+      color: var(--accent-hot);
+    }
+
+    .video-play:focus-visible {
+      outline: 3px solid var(--accent-3);
+      outline-offset: 5px;
+    }
+
+    .video-play svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .experience-video {
+      display: block;
+      background: #1d1029;
+      object-fit: contain;
+    }
+
+    .experience-video[hidden] {
+      display: none;
+    }
+
     .definition {
       margin: clamp(38px, 6vw, 58px) 0 clamp(74px, 9vw, 104px);
       padding: 20px 0 20px clamp(18px, 4vw, 30px);
@@ -540,7 +620,6 @@
 
   <main id="content" class="document">
     <section class="hero-copy" aria-labelledby="page-title">
-      <div class="eyebrow">weekly practice</div>
       <h1 id="page-title">Sthir Saturdays</h1>
       <p class="tagline">Sthir : a mind gym for your discernment muscle.</p>
 
@@ -549,18 +628,37 @@
       </p>
 
       <div class="meta-row" aria-label="Event details">
-        <span class="meta">Saturdays</span>
-        <span class="meta">8:30–9:30 PM IST</span>
-        <span class="meta">Zoom</span>
-        <span class="meta">Free</span>
+        <span class="meta">Saturdays · 8:30–9:30 PM IST · ZOOM · FREE</span>
       </div>
 
       <a class="cta" href="https://forms.gle/jkNnp8aySgCaUSRY9" target="_blank" rel="noopener noreferrer">
-        Join in!
+        JOIN IN!
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </a>
+    </section>
+
+    <!-- ========================================================
+         VIDEO SLOT
+         The bundled MP4/MOV can be swapped later without changing
+         the rest of the page. The initial state is an intentional
+         branded placeholder; click the play control to reveal it.
+         ======================================================== -->
+    <section class="video-slot" aria-label="Sthir Saturdays experience video">
+      <div class="video-placeholder" id="videoPlaceholder">
+        <button class="video-play" id="videoPlay" type="button" aria-label="Play Sthir Saturdays experience video">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="30" fill="currentColor" opacity="0.96"/>
+            <path d="M26 20.5 46 32 26 43.5Z" fill="#fff7df"/>
+          </svg>
+        </button>
+      </div>
+      <video class="experience-video" id="experienceVideo" controls playsinline preload="metadata" hidden>
+        <source src="./assets/SthirSaturdays_Experience.mp4" type="video/mp4" />
+        <source src="./assets/SthirSaturdays_Experience.mov" type="video/quicktime" />
+        Your browser does not support embedded video.
+      </video>
     </section>
 
     <blockquote class="definition">
@@ -614,12 +712,28 @@
 
       <p class="closing-note">No worksheets to “discover your passion.” Just weekly reps until choosing, and owning your choice, feels more natural.</p>
 
-      <p class="footnote"><em>*play</em> - a state of active, joyful, and low-stakes experimentation where performers drop their inner critic, embrace spontaneity, and treat the creation of a scene like a fun game rather than a stressful performance. It relies on a mindset of curiosity and mutual trust.</p>
+      <blockquote class="footnote"><em>*play</em> - a state of active, joyful, and low-stakes experimentation where performers drop their inner critic, embrace spontaneity, and treat the creation of a scene like a fun game rather than a stressful performance. It relies on a mindset of curiosity and mutual trust.</blockquote>
     </section>
   </main>
 
-  <footer>
-    Sthir Saturdays · <a href="https://forms.gle/jkNnp8aySgCaUSRY9" target="_blank" rel="noopener noreferrer">join the next session</a>
-  </footer>
+  <script>
+    (() => {
+      const placeholder = document.getElementById('videoPlaceholder');
+      const play = document.getElementById('videoPlay');
+      const video = document.getElementById('experienceVideo');
+
+      if (!placeholder || !play || !video) return;
+
+      play.addEventListener('click', () => {
+        placeholder.hidden = true;
+        video.hidden = false;
+        const maybePlay = video.play();
+        if (maybePlay && typeof maybePlay.catch === 'function') {
+          maybePlay.catch(() => {});
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
